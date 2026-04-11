@@ -9,7 +9,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Categoria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_seq")
+    @SequenceGenerator(
+            name = "categoria_seq",
+            sequenceName = "CATEGORIA_SEQ", // 🔥 TEM QUE SER IGUAL AO BANCO
+            allocationSize = 1
+    )
     private Long id;
 
     @Column(nullable = false)

@@ -8,7 +8,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Alimentos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "alimento_seq")
+    @SequenceGenerator(
+            name = "alimento_seq",
+            sequenceName = "ALIMENTO_SEQ", // 🔥 igual ao banco
+            allocationSize = 1
+    )
     private Long id;
 
     @Column(nullable = false)
