@@ -19,6 +19,14 @@ target/
 *.iml
 *.ipr
 
+ ### Wallet ###
+ Wallet_ADMIN/
+ *.zip
+ *.p12
+ *.sso
+ *.jks
+ *.pem
+ *.key
 
 ### NetBeans ###
 /nbproject/private/
