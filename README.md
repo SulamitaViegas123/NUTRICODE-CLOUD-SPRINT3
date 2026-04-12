@@ -39,7 +39,7 @@ Permitir o gerenciamento de dados nutricionais através de operações CRUD, fac
 * Spring Data JPA
 * Maven
 * Oracle Database
-* SQL Developer
+* SQL Commands
 * Ubuntu
 
 ---
@@ -131,7 +131,7 @@ Os dados são armazenados em banco relacional, garantindo:
 ### 📋 Pré-requisitos:
 * Java 17
 * Maven
-* Oracle SQL Developer
+* Oracle SQL Commands
 * Wallet do Oracle Cloud (fornecido separadamente
 
   ---
@@ -150,7 +150,7 @@ Este projeto utiliza um banco de dados Oracle hospedado na nuvem (OCI), com cone
 
 ```bash
 mvn clean install
-java -jar target/nutricode-api.jar
+java -jar target/nutricode-0.0.1-SNAPSHOT.jar
 ```
 Após iniciar, a API estará disponível em:
 http://SEU_IP:8080/alimentos
