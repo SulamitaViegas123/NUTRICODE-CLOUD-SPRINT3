@@ -128,25 +128,39 @@ Os dados são armazenados em banco relacional, garantindo:
 ---
 
 ## ▶️ Como Executar o Projeto
-
-### Pré-requisitos:
-
+### 📋 Pré-requisitos:
 * Java 17
 * Maven
+* Oracle SQL Developer
+* Wallet do Oracle Cloud (fornecido separadamente
 
-### Execução:
+  ---
+
+### ⚙️ Configuração do Banco de Dados (Oracle Cloud)
+Este projeto utiliza um banco de dados Oracle hospedado na nuvem (OCI), com conexão segura via **Wallet**.
+
+#### 🔹 Passos de configuração:
+1. Baixar o **Wallet** (arquivo `.zip`) enviado junto com a entrega
+2. Extrair a pasta `Wallet_ADMIN` em um local da sua máquina
+3. Atualizar o caminho Wallet no sqlnet.ora(dentro da pasta wallet) e no application.properties do projeto
+4. Testar a conexão e conectar ao banco
+
+
+### ▶️ Execução:
 
 ```bash
 mvn clean install
 java -jar target/nutricode-api.jar
 ```
+Após iniciar, a API estará disponível em:
+http://SEU_IP:8080/alimentos
+http://SEU_IP:8080/categorias
 
 ---
 
 ## 🎥 Demonstração
 
 O vídeo demonstra:
-
 * Execução da aplicação
 * Operações CRUD completas
 * Persistência no banco de dados
