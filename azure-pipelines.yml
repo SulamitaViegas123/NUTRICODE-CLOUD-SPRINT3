@@ -11,36 +11,19 @@ variables:
   webAppName: 'appservice-nutricode'
 
 stages:
-  - stage: CI
-    displayName: 'CI - Build'
+  - stage: CI_CD
+    displayName: 'CI/CD - Build e Deploy'
     jobs:
-      - job: Build
+      - job: BuildAndDeploy
+        displayName: 'Build e Deploy no Azure App Service'
         steps:
           - checkout: self
 
-          - task: Maven@4
+          - task: Maven@3
             displayName: 'Build com Maven'
             inputs:
               mavenPomFile: 'pom.xml'
               goals: 'clean package -DskipTests'
-
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publicar JAR'
-            inputs:
-              targetPath: '$(System.DefaultWorkingDirectory)/target'
-              artifact: 'drop'
-
-  - stage: CD
-    displayName: 'CD - Deploy'
-    dependsOn: CI
-    jobs:
-      - job: Deploy
-        steps:
-          - task: DownloadPipelineArtifact@2
-            displayName: 'Baixar artefato'
-            inputs:
-              artifact: 'drop'
-              path: '$(Pipeline.Workspace)/drop'
 
           - task: AzureWebApp@1
             displayName: 'Deploy no Azure App Service'
@@ -48,4 +31,4 @@ stages:
               azureSubscription: '$(azureSubscription)'
               appType: 'webAppLinux'
               appName: '$(webAppName)'
-              package: '$(Pipeline.Workspace)/drop/*.jar'
+              package: '$(System.DefaultWorkingDirectory)/target/*.jar'
