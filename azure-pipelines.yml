@@ -15,7 +15,7 @@ stages:
     displayName: 'CI/CD - Build e Deploy'
     jobs:
       - job: BuildAndDeploy
-        displayName: 'Build e Deploy no Azure App Service'
+        displayName: 'Build e Deploy'
         steps:
           - checkout: self
 
@@ -25,10 +25,11 @@ stages:
               mavenPomFile: 'pom.xml'
               goals: 'clean package -DskipTests'
 
-          - task: AzureWebApp@1
+          - task: AzureRmWebAppDeployment@4
             displayName: 'Deploy no Azure App Service'
             inputs:
+              ConnectionType: 'PublishProfile'
               azureSubscription: '$(azureSubscription)'
               appType: 'webAppLinux'
-              appName: '$(webAppName)'
-              package: '$(System.DefaultWorkingDirectory)/target/*.jar'
+              WebAppName: '$(webAppName)'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/target/*.jar'
