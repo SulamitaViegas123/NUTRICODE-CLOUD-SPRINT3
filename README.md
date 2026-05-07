@@ -1,69 +1,170 @@
-# 🥗 NutriCode API
+# 🥗 NutriCode API - Sprint 4 DevOps
 
-## 📌 Descrição do Projeto
-A **NutriCode API** é uma aplicação desenvolvida em **Spring Boot** com o objetivo de gerenciar informações nutricionais, permitindo o cadastro, consulta, atualização e exclusão de dados relacionados a **alimentos** e **categorias**.
-
-A aplicação foi implantada em ambiente de **computação em nuvem**, atendendo aos requisitos propostos para demonstrar o uso de serviços de aplicação e banco de dados.
+<p align="center">
+  <img width="350" src="https://i.imgur.com/2qv7wRc.png">
+</p>
 
 ---
 
-## ☁️ Arquitetura da Solução
+# 📌 Descrição da Solução
+
+A **NutriCode API** é uma aplicação REST desenvolvida em **Java com Spring Boot**, responsável pelo gerenciamento de informações nutricionais por meio de operações CRUD.
+
+O projeto permite o cadastro, consulta, atualização e exclusão de:
+
+- 🍎 Alimentos
+- 🗂️ Categorias
+
+A aplicação utiliza um banco de dados Oracle em nuvem, mantendo relacionamento entre tabelas e persistência dos dados em ambiente cloud.
+
+Nesta Sprint, a solução foi integrada a uma esteira **CI/CD DevOps**, utilizando **Azure DevOps Pipelines** e **Azure App Service**, automatizando build e deploy da aplicação.
+
+---
+
+# ☁️ Arquitetura da Solução
+
+## 🔹 Fluxo da Aplicação
 
 ```text
-Cliente (curl/Postman)
-        ↓
-API Spring Boot (VM em Nuvem)
-        ↓
-Banco de Dados Relacional (Oracle)
-```
-
-### 🔹 Componentes:
-
-* API REST desenvolvida com Spring Boot
-* Máquina Virtual em nuvem
-* Banco de dados relacional (Oracle)
-* Integração via JDBC
-
----
-
-## 🎯 Objetivo da Aplicação
-
-Permitir o gerenciamento de dados nutricionais através de operações CRUD, facilitando a organização de alimentos por categorias específicas, como dietas e restrições alimentares.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-* Java 17
-* Spring Boot
-* Spring Data JPA
-* Maven
-* Oracle Database
-* SQL Commands
-* Ubuntu
-
----
-
-## 🗂️ Estrutura do Projeto
-
-```text
-src/
- ├── controller
- ├── model
- └── repository
+GitHub
+   ↓
+Azure DevOps Pipeline (CI/CD)
+   ↓
+Build Maven + Geração do .jar
+   ↓
+Deploy Automático
+   ↓
+Azure App Service (PaaS)
+   ↓
+Oracle Autonomous Database (OCI)
 ```
 
 ---
 
-## 🧱 Modelagem do Banco de Dados
+# 🧩 Componentes da Solução
 
-### 📌 Relacionamento
-
-* Uma **Categoria** pode possuir vários **Alimentos** (1:N)
+| Componente | Função |
+|---|---|
+| GitHub | Versionamento do código |
+| Azure DevOps | Orquestração da pipeline |
+| Maven | Build e empacotamento |
+| Azure App Service | Hospedagem da API |
+| Oracle Autonomous Database | Persistência dos dados |
+| JDBC | Comunicação segura com banco |
 
 ---
 
-## 🧾 DDL das Tabelas
+# 🎯 Objetivo da Aplicação
+
+Automatizar o ciclo de integração e entrega contínua da aplicação NutriCode, garantindo:
+
+- ✔️ Maior eficiência operacional
+- ✔️ Redução de erros manuais
+- ✔️ Deploy automatizado
+- ✔️ Persistência segura em nuvem
+- ✔️ Escalabilidade da aplicação
+
+---
+
+# 🚀 Tecnologias Utilizadas
+
+## 🔹 Backend
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- Maven
+
+## 🔹 DevOps & Cloud
+- Azure DevOps
+- Azure Pipelines
+- Azure App Service (PaaS)
+- GitHub
+
+## 🔹 Banco de Dados
+- Oracle Autonomous Database (OCI)
+- JDBC
+
+## 🔹 Testes
+- Postman
+- cURL
+
+---
+
+# 🔄 Pipeline CI/CD
+
+A pipeline foi configurada utilizando **Azure DevOps Pipelines** com integração contínua e entrega contínua.
+
+## 🔹 Etapas da Pipeline
+
+### 1️⃣ Repositório GitHub
+O código-fonte da aplicação fica armazenado e versionado no GitHub.
+
+### 2️⃣ Trigger Automático
+A pipeline é acionada automaticamente após push na branch `main`.
+
+### 3️⃣ Build da Aplicação (CI)
+O Azure DevOps realiza:
+
+- checkout do código
+- build Maven
+- compilação da aplicação
+- validação do projeto
+
+Comando executado:
+
+```bash
+mvn clean package -DskipTests
+```
+
+### 4️⃣ Geração do Artefato
+Após o build, é gerado um arquivo:
+
+```text
+.jar
+```
+
+representando a aplicação pronta para deploy.
+
+### 5️⃣ Deploy Automático (CD)
+O deploy é realizado automaticamente no:
+
+```text
+Azure App Service
+```
+
+serviço PaaS responsável pela hospedagem da aplicação.
+
+### 6️⃣ Persistência em Nuvem
+A API mantém conexão JDBC segura com o Oracle Autonomous Database hospedado na OCI.
+
+---
+
+# 🗂️ Estrutura do Projeto
+
+```text
+src
+ ┣ controller
+ ┣ model
+ ┣ repository
+ ┣ service
+ ┗ resources
+```
+
+---
+
+# 🧱 Modelagem do Banco de Dados
+
+## 🔹 Relacionamento
+
+```text
+Categoria 1:N Alimento
+```
+
+Uma categoria pode possuir vários alimentos.
+
+---
+
+# 🧾 DDL das Tabelas
 
 ```sql
 CREATE TABLE categoria (
@@ -83,101 +184,143 @@ CREATE TABLE alimento (
 
 ---
 
-## 🔄 Endpoints da API
- http://10.0.0.34:8080/alimentos
- http://10.0.0.34:8080/categorias
-A API está hospedada em ambiente de nuvem (OCI), porém o acesso externo pode estar restrito. 
-Os testes podem ser realizados via ambiente interno ou conforme demonstrado no vídeo.
+# 🔗 Endpoints da API
 
-## 🧪 Exemplos de Testes (cURL)
+## 📌 Categorias
 
-```bash
-# Listar categorias
-curl http://SEU_IP:8080/categorias
+| Método | Endpoint |
+|---|---|
+| GET | /categorias |
+| POST | /categorias |
+| PUT | /categorias/{id} |
+| DELETE | /categorias/{id} |
 
-# Criar categoria
-curl -X POST http://SEU_IP:8080/categorias \
--H "Content-Type: application/json" \
--d '{"nome":"Low Carb"}'
+---
 
-# Criar alimento
-curl -X POST http://SEU_IP:8080/alimentos \
--H "Content-Type: application/json" \
--d '{"nome":"Ovo","categoria":{"id":1}}'
+## 📌 Alimentos
+
+| Método | Endpoint |
+|---|---|
+| GET | /alimentos |
+| POST | /alimentos |
+| PUT | /alimentos/{id} |
+| DELETE | /alimentos/{id} |
+
+---
+
+# 🧪 Exemplos JSON
+
+## 🔹 Criar Categoria
+
+```json
+{
+  "nome": "Fitness"
+}
 ```
 
 ---
 
-## 💾 Persistência de Dados
+## 🔹 Criar Alimento
 
-Os dados são armazenados em banco relacional, garantindo:
-
-* Integridade referencial
-* Relacionamento entre entidades
-* Persistência em ambiente de nuvem
-
----
-
-## 📊 Benefícios da Solução
-
-* Organização eficiente de dados nutricionais
-* Escalabilidade com uso de computação em nuvem
-* Separação clara entre aplicação e banco de dados
-* Facilidade de manutenção e expansão
+```json
+{
+  "nome": "Frango",
+  "descricao": "Fonte de proteína",
+  "categoria": {
+    "id": 1
+  }
+}
+```
 
 ---
 
-## ▶️ Como Executar o Projeto
-### 📋 Pré-requisitos:
-* Java 17
-* Maven
-* Oracle SQL Commands
-* Wallet do Oracle Cloud (fornecido separadamente
+# 💾 Persistência de Dados
 
-  ---
+Os dados são persistidos em ambiente cloud utilizando Oracle Autonomous Database (OCI), garantindo:
 
-### ⚙️ Configuração do Banco de Dados (Oracle Cloud)
-Este projeto utiliza um banco de dados Oracle hospedado na nuvem (OCI), com conexão segura via **Wallet**.
+- ✔️ Integridade referencial
+- ✔️ Relacionamento entre tabelas
+- ✔️ Persistência segura
+- ✔️ Armazenamento em nuvem
 
-#### 🔹 Passos de configuração:
-1. Baixar o **Wallet** (arquivo `.zip`) enviado junto com a entrega
-2. Extrair a pasta `Wallet_ADMIN` em um local da sua máquina
-3. Atualizar o caminho Wallet no sqlnet.ora(dentro da pasta wallet) e no application.properties do projeto
-4. Testar a conexão e conectar ao banco
+---
 
+# 🔒 Segurança
 
-### ▶️ Execução:
+As credenciais sensíveis da aplicação não ficam expostas diretamente no código-fonte, sendo armazenadas por meio de configurações seguras da aplicação e ambiente.
+
+---
+
+# ▶️ Como Executar o Projeto
+
+## 📋 Pré-requisitos
+
+- Java 17
+- Maven
+- Oracle Wallet
+- Oracle Autonomous Database
+
+---
+
+## ⚙️ Configuração
+
+1️⃣ Clonar o repositório:
+
+```bash
+git clone https://github.com/SulamitaViegas123/NUTRICODE-CLOUD-SPRINT3.git
+```
+
+---
+
+2️⃣ Configurar o Wallet Oracle
+
+Extrair a pasta Wallet e configurar o caminho no:
+
+```text
+application.properties
+```
+
+---
+
+3️⃣ Executar a aplicação
 
 ```bash
 mvn clean install
 java -jar target/nutricode-0.0.1-SNAPSHOT.jar
 ```
-Após iniciar, a API estará disponível em:
-http://SEU_IP:8080/alimentos
-http://SEU_IP:8080/categorias
 
 ---
 
-## 🎥 Demonstração
+# 🎥 Demonstração
 
 O vídeo demonstra:
-* Execução da aplicação
-* Operações CRUD completas
-* Persistência no banco de dados
+
+- ✔️ Azure DevOps
+- ✔️ Execução da Pipeline
+- ✔️ Build Maven
+- ✔️ Deploy automático
+- ✔️ Funcionamento da API
+- ✔️ Persistência no Oracle Cloud Database
 
 ---
 
-## 👥 Integrantes
+# 👥 Integrantes
 
-* RM560914 - Lucas Siqueira de Almeida
-* RM561090 - Matteus Viegas dos Santos
-* RM561089 - Sulamita Viegas dos Santos
-
----
-
-## 🔗 Links
-
-* Repositório GitHub: https://github.com/SulamitaViegas123/NUTRICODE-CLOUD-SPRINT3.git
-* Vídeo de demonstração:
+| RM | Nome |
+|---|---|
+| RM560914 | Lucas Siqueira de Almeida |
+| RM561090 | Matteus Viegas dos Santos |
+| RM561089 | Sulamita Viegas dos Santos |
 
 ---
+
+# 🔗 Links
+
+## 📌 GitHub
+https://github.com/SulamitaViegas123/NUTRICODE-CLOUD-SPRINT3.git
+
+## 📌 Azure DevOps
+https://dev.azure.com/NUTRICODE-DEVOPS-SPRINT4
+
+## 📌 Vídeo Demonstração
+(XXXXXXXXXXXXXXXXX)
