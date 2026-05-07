@@ -1,9 +1,5 @@
 # 🥗 NutriCode API - Sprint 4 DevOps
 
-<p align="center">
-  <img width="350" src="https://i.imgur.com/2qv7wRc.png">
-</p>
-
 ---
 
 # 📌 Descrição da Solução
