@@ -64,7 +64,7 @@ Automatizar o ciclo de integração e entrega contínua da aplicação NutriCode
 
 # 🚀 Tecnologias Utilizadas
 
-## 🔹 Backend
+## 🔹 Back-End
 - Java 17
 - Spring Boot
 - Spring Data JPA
